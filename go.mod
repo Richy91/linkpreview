@@ -1,4 +1,4 @@
-module linkpreview
+module github.com/Richy91/linkpreview
 
 go 1.24.6
 
