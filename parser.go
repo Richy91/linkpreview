@@ -16,19 +16,27 @@ func (l *LinkPreview) parseResponseBody(body io.Reader) ([]byte, error) {
 	data := make(map[string]string)
 
 	if l.Title {
-		title := extractMetaContent(doc, "og:title")
+		title := extractMetaContent(doc, "property", "og:title")
+
+		if title == "" {
+			title = doc.Find("title").Text()
+		}
 
 		data["title"] = title
 	}
 
 	if l.Description {
-		description := extractMetaContent(doc, "og:description")
+		description := extractMetaContent(doc, "property", "og:description")
+
+		if description == "" {
+			description = extractMetaContent(doc, "name", "description")
+		}
 
 		data["description"] = description
 	}
 
 	if l.Image {
-		image := extractMetaContent(doc, "og:image")
+		image := extractMetaContent(doc, "property", "og:image")
 
 		data["image"] = image
 	}
@@ -40,7 +48,7 @@ func (l *LinkPreview) parseResponseBody(body io.Reader) ([]byte, error) {
 	}
 
 	if l.SiteName {
-		SiteName := extractMetaContent(doc, "og:site_name")
+		SiteName := extractMetaContent(doc, "property", "og:site_name")
 
 		data["site_name"] = SiteName
 	}
@@ -53,6 +61,6 @@ func (l *LinkPreview) parseResponseBody(body io.Reader) ([]byte, error) {
 	return result, nil
 }
 
-func extractMetaContent(doc *goquery.Document, property string) string {
-	return doc.Find("meta[property='"+property+"']").AttrOr("content", "")
+func extractMetaContent(doc *goquery.Document, key, value string) string {
+	return doc.Find("meta["+key+"='"+value+"']").AttrOr("content", "")
 }
