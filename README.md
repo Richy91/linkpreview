@@ -2,10 +2,10 @@
 
 Small, opinionated Go library for generating link previews (title, description, image, favicon, site name) using `goquery`.
 
-- ✅ Open Graph + Twitter Card fallbacks  
-- ✅ Functional options (pick only what you need)  
-- ✅ Sensible defaults (timeout, UA)  
-- ✅ Tiny surface area
+-   ✅ Open Graph + standard HTML fallbacks
+-   ✅ Functional options (pick only what you need)
+-   ✅ Sensible defaults (timeout, UA)
+-   ✅ Tiny surface area
 
 ---
 
@@ -14,9 +14,11 @@ Small, opinionated Go library for generating link previews (title, description, 
 ```bash
 go get github.com/Richy91/linkpreview
 ```
+
 ---
 
 ## Use
+
 ```
 package main
 
@@ -50,6 +52,7 @@ func main() {
 ```
 
 ## output
+
 ```
 {
   "url": "https://github.com/PuerkitoBio/goquery",
